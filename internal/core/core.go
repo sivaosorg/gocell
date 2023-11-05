@@ -2,8 +2,12 @@ package core
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/sivaosorg/govm/configx"
+	"github.com/sivaosorg/mysqlconn/mysqlconn"
+	"github.com/sivaosorg/postgresconn/postgresconn"
+	"github.com/sivaosorg/redisconn/redisconn"
 )
 
 // Conf global
@@ -31,5 +35,23 @@ func (c *CoreCommand) Execute(args []string) error {
 		return err
 	}
 	Conf = keys
+	// Set Timeout deadline
+	Conf.Postgres.SetTimeout(10 * time.Second)
+	Conf.MySql.SetTimeout(10 * time.Second)
+	Conf.Redis.SetTimeout(10 * time.Second)
+
+	// Instances
+	psql, s := postgresconn.NewClient(Conf.Postgres)
+	if s.IsConnected {
+		defer psql.Close()
+	}
+	msql, s := mysqlconn.NewClient(Conf.MySql)
+	if s.IsConnected {
+		defer msql.Close()
+	}
+	redis, s := redisconn.NewClient(Conf.Redis)
+	if s.IsConnected {
+		defer redis.Close()
+	}
 	return nil
 }
