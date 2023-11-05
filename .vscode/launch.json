@@ -12,7 +12,7 @@
             "program": "${workspaceFolder}/cmd/job/main.go",
             "args": [
                 "start_server_job",
-                "up"
+                "./../../config/conf-local.yaml"
             ]
         },
         {
@@ -23,7 +23,7 @@
             "program": "${workspaceFolder}/cmd/api/main.go",
             "args": [
                 "start_server",
-                "up",
+                "./../../config/conf-local.yaml",
             ]
         }
     ]

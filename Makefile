@@ -3,18 +3,18 @@
 # ==============================================================================
 # Start Rest
 run:
-	go run ./cmd/api/main.go start_server up
+	go run ./cmd/api/main.go start_server ./config/conf-local.yaml
 
 build:
-	go build ./cmd/api/main.go start_server up
+	go build ./cmd/api/main.go start_server ./config/conf-local.yaml
 
 # ==============================================================================
 # Start Job
 run-job:
-	go run ./cmd/job/main.go start_server_job up
+	go run ./cmd/job/main.go start_server_job ./config/conf-local.yaml
 
 build-job:
-	go build ./cmd/job/main.go start_server_job up
+	go build ./cmd/job/main.go start_server_job ./config/conf-local.yaml
 
 # ==============================================================================
 # Modules support

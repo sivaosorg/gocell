@@ -1,7 +1,19 @@
 package main
 
-import "github.com/sivaosorg/govm/logger"
+import (
+	"os"
+
+	"github.com/sivaosorg/gocell/internal/job"
+	"github.com/sivaosorg/govm/cmd"
+	"github.com/sivaosorg/govm/logger"
+)
 
 func main() {
-	logger.Infof("App JOB running ....")
+	command := cmd.NewCommandManager()
+	command.AddCommand(&job.JobCommand{})
+	err := command.Execute(os.Args)
+	if err != nil {
+		logger.Errorf("Internal Server", err, err.Error())
+		panic(err)
+	}
 }

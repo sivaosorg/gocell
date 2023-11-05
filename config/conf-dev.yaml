@@ -1,0 +1,269 @@
+# ################################
+# Server Config
+# 2023-11-05 10:48:54
+# ################################
+server:
+  host: 127.0.0.1
+  port: 8081
+  mode: debug
+  timeout:
+    serve: 10s
+    read: 10s
+    write: 10s
+    idle: 10s
+  attr:
+    max_header_bytes: 1048576
+  ssl:
+    enabled: false
+    cert_file: ./keys/ssl/cert.crt
+    key_file: ./keys/ssl/key.pem
+  serve_proxy:
+    enabled: false
+    port: 9999
+    timeout:
+      serve: 10s
+      read: 10s
+      write: 10s
+      idle: 10s
+    attr:
+      max_header_bytes: 1048576
+# ################################
+# Mongodb Config
+# 2023-11-05 10:48:54
+# ################################
+mongodb:
+  enabled: false
+  debug_mode: false
+  url_conn: mongodb://127.0.0.1:27017/u_db
+  host: 127.0.0.1
+  port: 27017
+  database: u_db
+  username: u@root
+  password: pwd
+  timeout_second_conn: 30
+  allow_conn_sync: true
+  timeout: 10s
+# ################################
+# MySQL Config
+# 2023-11-05 10:48:54
+# ################################
+mysql:
+  enabled: false
+  debug_mode: false
+  database: u_db
+  host: 127.0.0.1
+  port: 3306
+  username: u@root
+  password: pwd
+  max-open-conn: 10
+  max-idle-conn: 2
+  max-life-time-minutes-conn: 10
+# ################################
+# Postgres Config
+# 2023-11-05 10:48:54
+# ################################
+postgres:
+  enabled: false
+  debug_mode: false
+  database: u_db
+  host: 127.0.0.1
+  port: 5432
+  username: u@root
+  password: pwd
+  ssl-mode: disable
+  max-open-conn: 5
+  max-idle-conn: 3
+# ################################
+# RabbitMQ Config
+# 2023-11-05 10:48:54
+# ################################
+rabbitmq:
+  enabled: false
+  debug_mode: false
+  url_conn: amqp://guest:guest@localhost:5672/
+  username: guest
+  password: guest
+  host: 127.0.0.1
+  port: 5672
+  message:
+    enabled: false
+    exchange:
+      name: guest_exchange
+      kind: fanout
+      durable: true
+    queue:
+      name: guest_queue
+      durable: true
+  clusters:
+    rabbit_mq_1:
+      enabled: false
+      exchange:
+        name: guest_exchange
+        kind: fanout
+        durable: true
+      queue:
+        name: guest_queue
+        durable: true
+    rabbit_mq_2:
+      enabled: false
+      exchange:
+        name: guest_exchange
+        kind: fanout
+        durable: true
+      queue:
+        name: guest_queue
+        durable: true
+# ################################
+# Redis Config
+# 2023-11-05 10:48:54
+# ################################
+redis:
+  enabled: false
+  debug_mode: false
+  url_conn: localhost:6379
+  password: redis.pwd
+  database: database_stable
+# ################################
+# Cors Config
+# 2023-11-05 10:48:54
+# ################################
+cors:
+  enabled: false
+  allowed-origins:
+  - '*'
+  allowed-methods:
+  - GET
+  - POST
+  - PUT
+  - DELETE
+  - OPTIONS
+  allowed-headers:
+  - Origin
+  - Accept
+  - Content-Type
+  - Authorization
+  exposed-headers: []
+  allow-credentials: true
+  max-age: 3600
+# ################################
+# Cookie Config
+# 2023-11-05 10:48:54
+# ################################
+cookie:
+  enabled: false
+  name: user
+  value: ""
+  path: /
+  domain: ""
+  max_age: 86400
+  secure: false
+  http_only: true
+  timeout: 10s
+# ################################
+# Telegram Seekers Config
+# 2023-11-05 10:48:54
+# ################################
+telegram-seekers:
+- key: tenant_1
+  usable_default: true
+  config:
+    enabled: false
+    debug_mode: false
+    chat_id:
+    - 123456789
+    token: <token_here>
+  option:
+    type: Markdown
+    max-retries: 2
+# ################################
+# Slack Seekers Config
+# 2023-11-05 10:48:54
+# ################################
+slack-seekers:
+- key: tenant_1
+  usable_default: true
+  config:
+    enabled: false
+    debug_mode: false
+    channel_id:
+    - "123456789"
+    token: <token-here>
+  option:
+    max-retries: 0
+# ################################
+# Mongodb Seekers Config
+# 2023-11-05 10:48:54
+# ################################
+mongodb-seekers:
+- key: tenant_1
+  usable_default: false
+  config:
+    enabled: false
+    debug_mode: false
+    url_conn: mongodb://127.0.0.1:27017/u_db
+    host: 127.0.0.1
+    port: 27017
+    database: u_db
+    username: u@root
+    password: pwd
+    timeout_second_conn: 30
+    allow_conn_sync: true
+    timeout: 10s
+  option: {}
+# ################################
+# MySQL Seekers Config
+# 2023-11-05 10:48:54
+# ################################
+mysql-seekers:
+- key: tenant_1
+  usable_default: false
+  config:
+    enabled: false
+    debug_mode: false
+    database: u_db
+    host: 127.0.0.1
+    port: 3306
+    username: u@root
+    password: pwd
+    max-open-conn: 10
+    max-idle-conn: 2
+    max-life-time-minutes-conn: 10
+  option: {}
+# ################################
+# Postgres Seekers Config
+# 2023-11-05 10:48:54
+# ################################
+postgres-seekers:
+- key: tenant_1
+  usable_default: false
+  config:
+    enabled: false
+    debug_mode: false
+    database: u_db
+    host: 127.0.0.1
+    port: 5432
+    username: u@root
+    password: pwd
+    ssl-mode: disable
+    max-open-conn: 5
+    max-idle-conn: 3
+  option: {}
+# ################################
+# Cookie Seekers Config
+# 2023-11-05 10:48:54
+# ################################
+cookie-seekers:
+- key: tenant_1
+  usable_default: true
+  config:
+    enabled: false
+    name: user
+    value: ""
+    path: /
+    domain: ""
+    max_age: 86400
+    secure: false
+    http_only: true
+    timeout: 10s
+  option:
+    max_retries: 2

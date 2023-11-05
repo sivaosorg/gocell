@@ -1,7 +1,19 @@
 package main
 
-import "github.com/sivaosorg/govm/logger"
+import (
+	"os"
+
+	"github.com/sivaosorg/gocell/internal/core"
+	"github.com/sivaosorg/govm/cmd"
+	"github.com/sivaosorg/govm/logger"
+)
 
 func main() {
-	logger.Infof("App REST running ....")
+	command := cmd.NewCommandManager()
+	command.AddCommand(&core.CoreCommand{})
+	err := command.Execute(os.Args)
+	if err != nil {
+		logger.Errorf("Internal Server", err, err.Error())
+		panic(err)
+	}
 }
