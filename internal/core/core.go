@@ -6,18 +6,15 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
+	syncconf "github.com/sivaosorg/gocell/internal/syncConf"
 	"github.com/sivaosorg/govm/configx"
 	"github.com/sivaosorg/govm/dbx"
 	"github.com/sivaosorg/govm/server"
+	"github.com/sivaosorg/govm/utils"
 	"github.com/sivaosorg/mysqlconn/mysqlconn"
 	"github.com/sivaosorg/postgresconn/postgresconn"
 	"github.com/sivaosorg/redisconn/redisconn"
 )
-
-// Conf global
-// Get & Set key-value
-// Based on conf, to create new cluster / instance
-var Conf *configx.KeysConfig
 
 type CoreCommand struct {
 	psql        *postgresconn.Postgres
@@ -26,6 +23,7 @@ type CoreCommand struct {
 	msqlStatus  dbx.Dbx
 	redis       *redis.Client
 	redisStatus dbx.Dbx
+	params      *syncconf.KeyParams
 	handlers    *coreHandler
 }
 
@@ -45,7 +43,15 @@ func (c *CoreCommand) Execute(args []string) error {
 	if err != nil {
 		return err
 	}
-	Conf = keys
+	syncconf.Conf = keys
+	if utils.IsNotEmpty(args[1]) {
+		params, err := configx.ReadConfig[syncconf.KeyParams](args[1])
+		if err != nil {
+			return err
+		}
+		syncconf.Params = params
+		c.params = syncconf.Params
+	}
 	c.conn()
 	c.handler()
 	c.run()
@@ -53,13 +59,16 @@ func (c *CoreCommand) Execute(args []string) error {
 }
 
 func (c *CoreCommand) conn() {
-	Conf.Postgres.SetTimeout(10 * time.Second)
-	Conf.MySql.SetTimeout(10 * time.Second)
-	Conf.Redis.SetTimeout(10 * time.Second)
+	if syncconf.Conf == nil {
+		return
+	}
+	syncconf.Conf.Postgres.SetTimeout(10 * time.Second)
+	syncconf.Conf.MySql.SetTimeout(10 * time.Second)
+	syncconf.Conf.Redis.SetTimeout(10 * time.Second)
 
 	// Instances
 	go func() {
-		psql, s := postgresconn.NewClient(Conf.Postgres)
+		psql, s := postgresconn.NewClient(syncconf.Conf.Postgres)
 		if s.IsConnected {
 			defer psql.Close()
 		}
@@ -67,7 +76,7 @@ func (c *CoreCommand) conn() {
 		c.psqlStatus = s
 	}()
 	go func() {
-		msql, s := mysqlconn.NewClient(Conf.MySql)
+		msql, s := mysqlconn.NewClient(syncconf.Conf.MySql)
 		if s.IsConnected {
 			defer msql.Close()
 		}
@@ -75,7 +84,7 @@ func (c *CoreCommand) conn() {
 		c.msqlStatus = s
 	}()
 	go func() {
-		redis, s := redisconn.NewClient(Conf.Redis)
+		redis, s := redisconn.NewClient(syncconf.Conf.Redis)
 		if s.IsConnected {
 			defer redis.Close()
 		}
@@ -85,7 +94,7 @@ func (c *CoreCommand) conn() {
 }
 
 func (c *CoreCommand) run() {
-	gin.SetMode(Conf.Server.Mode)
+	gin.SetMode(syncconf.Conf.Server.Mode)
 	core := gin.New()
 	core.SetTrustedProxies(nil)
 
@@ -99,22 +108,22 @@ func (c *CoreCommand) run() {
 
 	// start server
 	go func() {
-		if Conf.Server.SSL.IsEnabled {
-			err := core.RunTLS(Conf.Server.CreateAppServer(core.Handler()).Addr,
-				Conf.Server.SSL.CertFile, Conf.Server.SSL.KeyFile)
+		if syncconf.Conf.Server.SSL.IsEnabled {
+			err := core.RunTLS(syncconf.Conf.Server.CreateAppServer(core.Handler()).Addr,
+				syncconf.Conf.Server.SSL.CertFile, syncconf.Conf.Server.SSL.KeyFile)
 			if err != nil {
 				panic(err)
 			}
 		} else {
-			err := core.Run(Conf.Server.CreateAppServer(core.Handler()).Addr)
+			err := core.Run(syncconf.Conf.Server.CreateAppServer(core.Handler()).Addr)
 			if err != nil {
 				panic(err)
 			}
 		}
 	}()
 	go func() {
-		if Conf.Server.SP.IsEnabled {
-			debug := Conf.Server.SP.CreateAppServer(core.Handler())
+		if syncconf.Conf.Server.SP.IsEnabled {
+			debug := syncconf.Conf.Server.SP.CreateAppServer(core.Handler())
 			server.StartServer(debug)
 		}
 	}()

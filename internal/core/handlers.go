@@ -1,6 +1,9 @@
 package core
 
-import "github.com/sivaosorg/gocell/internal/middlewares"
+import (
+	"github.com/sivaosorg/gocell/internal/middlewares"
+	syncconf "github.com/sivaosorg/gocell/internal/syncConf"
+)
 
 type coreHandler struct {
 	middlewares *middlewares.MiddlewareManager
@@ -17,5 +20,5 @@ func (c *coreHandler) setMiddlewares(value *middlewares.MiddlewareManager) *core
 
 func (c *CoreCommand) handler() {
 	c.handlers = NewCoreHandler().
-		setMiddlewares(middlewares.NewMiddlewareManager(Conf))
+		setMiddlewares(middlewares.NewMiddlewareManager(syncconf.Conf))
 }

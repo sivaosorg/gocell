@@ -3,10 +3,10 @@
 # ==============================================================================
 # Start Rest
 run:
-	go run ./cmd/api/main.go start_server ./config/conf-local.yaml
+	go run ./cmd/api/main.go start_server ./config/conf-local.yaml ./config/conf-params.yaml
 
 build:
-	go build ./cmd/api/main.go start_server ./config/conf-local.yaml
+	go build ./cmd/api/main.go start_server ./config/conf-local.yaml ./config/conf-params.yaml
 
 # ==============================================================================
 # Start Job
