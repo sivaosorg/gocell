@@ -1,16 +1,58 @@
 package syncconf
 
 import (
+	"fmt"
+
 	"github.com/sivaosorg/govm/apix"
 	"github.com/sivaosorg/govm/configx"
+	"github.com/sivaosorg/govm/utils"
 )
 
-// Conf global
-// Get & Set key-value
-// Based on conf, to create new cluster / instance
+// Global Configs yaml
 var Conf *configx.KeysConfig
-var Params *KeyParams
+var Params *keyParams
+var Jobs *interface{}
 
-type KeyParams struct {
+type keyParams struct {
 	Curl []apix.ApiRequestConfig `json:"curl" yaml:"curl"`
+}
+
+type sync struct {
+}
+
+func NewSync() *sync {
+	return &sync{}
+}
+
+func AvailableParams() bool {
+	return Params != nil
+}
+
+func AvailableConf() bool {
+	return Conf != nil
+}
+
+func AvailableJobs() bool {
+	return Jobs != nil
+}
+
+func (s *sync) GetClusters(args []string) (*configx.KeysConfig, error) {
+	keys, err := configx.ReadConfig[configx.KeysConfig](args[0])
+	return keys, err
+}
+
+func (s *sync) GetParams(args []string) (*keyParams, bool, error) {
+	index := 1
+	if utils.IsEmpty(args[index]) {
+		return nil, false, nil
+	}
+	if !(index >= 0 && index < len(args)) {
+		return nil, true, fmt.Errorf("Out of range args params: %v", index)
+	}
+	params, err := configx.ReadConfig[keyParams](args[index])
+	return params, true, err
+}
+
+func (s *sync) GetJobs(args []string) (*interface{}, bool, error) {
+	return nil, true, nil
 }

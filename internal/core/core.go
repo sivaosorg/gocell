@@ -7,10 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
 	syncconf "github.com/sivaosorg/gocell/internal/syncConf"
-	"github.com/sivaosorg/govm/configx"
 	"github.com/sivaosorg/govm/dbx"
 	"github.com/sivaosorg/govm/server"
-	"github.com/sivaosorg/govm/utils"
 	"github.com/sivaosorg/mysqlconn/mysqlconn"
 	"github.com/sivaosorg/postgresconn/postgresconn"
 	"github.com/sivaosorg/redisconn/redisconn"
@@ -23,7 +21,6 @@ type CoreCommand struct {
 	msqlStatus  dbx.Dbx
 	redis       *redis.Client
 	redisStatus dbx.Dbx
-	params      *syncconf.KeyParams
 	handlers    *coreHandler
 }
 
@@ -39,18 +36,9 @@ func (c *CoreCommand) Execute(args []string) error {
 	if len(args) == 0 {
 		return fmt.Errorf("CoreCommand Args is required")
 	}
-	keys, err := configx.ReadConfig[configx.KeysConfig](args[0])
+	err := c.snap(args)
 	if err != nil {
 		return err
-	}
-	syncconf.Conf = keys
-	if utils.IsNotEmpty(args[1]) {
-		params, err := configx.ReadConfig[syncconf.KeyParams](args[1])
-		if err != nil {
-			return err
-		}
-		syncconf.Params = params
-		c.params = syncconf.Params
 	}
 	c.conn()
 	c.handler()
@@ -127,4 +115,22 @@ func (c *CoreCommand) run() {
 			server.StartServer(debug)
 		}
 	}()
+}
+
+func (c *CoreCommand) snap(args []string) error {
+	s := syncconf.NewSync()
+	keys, err := s.GetClusters(args)
+	if err != nil {
+		return err
+	}
+	params, ok, err := s.GetParams(args)
+	if ok {
+		if err != nil {
+			return err
+		}
+	}
+	// sync and share config to variable global
+	syncconf.Conf = keys
+	syncconf.Params = params
+	return nil
 }

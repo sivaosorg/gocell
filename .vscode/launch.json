@@ -24,6 +24,7 @@
             "args": [
                 "start_server",
                 "./../../config/conf-local.yaml",
+                "./../../config/conf-params.yaml",
             ]
         }
     ]
