@@ -6,7 +6,7 @@ run:
 	go run ./cmd/api/main.go start_server ./config/conf-local.yaml ./config/conf-params.yaml
 
 build:
-	go build ./cmd/api/main.go start_server ./config/conf-local.yaml ./config/conf-params.yaml
+	go build ./cmd/api/main.go
 
 # ==============================================================================
 # Start Job
@@ -14,7 +14,7 @@ run-job:
 	go run ./cmd/job/main.go start_server_job ./config/conf-local.yaml
 
 build-job:
-	go build ./cmd/job/main.go start_server_job ./config/conf-local.yaml
+	go build ./cmd/job/main.go
 
 # ==============================================================================
 # Modules support
