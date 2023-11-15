@@ -120,8 +120,8 @@ github.com/rogpeppe/go-internal v1.8.0 h1:FCbCCtXNOY3UtUuHUYaghJg4y7Fd14rXifAYUA
 github.com/rogpeppe/go-internal v1.8.0/go.mod h1:WmiCO8CzOY8rg0OYDC4/i/2WRWAB6poM+XZ2dLUbcbE=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
-github.com/sivaosorg/govm v1.2.6 h1:BCUCNk/yy/rFZ+clMF7ftfw99ZQFO+4QSFV/xe2mWfA=
-github.com/sivaosorg/govm v1.2.6/go.mod h1:rXfPCNGc4ddPf1+VRX8Ytw/5xqehfPRrCr53Oi+cwpw=
+github.com/sivaosorg/govm v1.2.7 h1:r2HZJDMmU4+BLkQ5h6aC6tn2JZ4A7p6S+khd1a23GAk=
+github.com/sivaosorg/govm v1.2.7/go.mod h1:rXfPCNGc4ddPf1+VRX8Ytw/5xqehfPRrCr53Oi+cwpw=
 github.com/sivaosorg/mysqlconn v1.0.3 h1:UoxFe0abN6jibkk+bH3rvsIh+vOacujgJDvSSgTk2kY=
 github.com/sivaosorg/mysqlconn v1.0.3/go.mod h1:NqGtpFwM1E09oTK9G5LOHx0nbtFUjHPTo5V9ob1xCto=
 github.com/sivaosorg/postgresconn v1.0.5 h1:/dWZrGdh09QIj7xjFjxs99SpBHk0RanIincazjdWSnU=
