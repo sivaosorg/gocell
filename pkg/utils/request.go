@@ -33,3 +33,11 @@ func GetPostForms(ctx *gin.Context) map[string]string {
 	ctx.MultipartForm()
 	return charge.GetPostForms(ctx.Request)
 }
+
+func GetHeaders(ctx *gin.Context) map[string][]string {
+	headers := make(map[string][]string)
+	for key, values := range ctx.Request.Header {
+		headers[key] = values
+	}
+	return headers
+}

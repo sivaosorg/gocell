@@ -1,6 +1,8 @@
 package middlewares
 
-import "github.com/sivaosorg/govm/configx"
+import (
+	"github.com/sivaosorg/govm/configx"
+)
 
 type MiddlewareManager struct {
 	conf *configx.KeysConfig
