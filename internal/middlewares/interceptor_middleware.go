@@ -40,15 +40,7 @@ func (m *MiddlewareManager) RequestMiddleWare() gin.HandlerFunc {
 			bodyBuffer:     bytes.NewBufferString(""),
 		}
 		c.Writer = wrappedWriter
-		// Make the request handling asynchronous
-		go func() {
-			defer func() {
-				if r := recover(); r != nil {
-					logger.Debugf("Asynchronous request recover handling: %v", r)
-				}
-			}()
-			c.Next()
-		}()
+		c.Next()
 		m.async(c, wrappedWriter)
 	}
 }

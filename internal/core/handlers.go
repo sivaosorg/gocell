@@ -1,24 +1,24 @@
 package core
 
 import (
+	"github.com/sivaosorg/gocell/internal/handlers"
 	"github.com/sivaosorg/gocell/internal/middlewares"
+	"github.com/sivaosorg/gocell/internal/repository"
+	"github.com/sivaosorg/gocell/internal/service"
 	syncconf "github.com/sivaosorg/gocell/internal/syncConf"
 )
 
 type coreHandler struct {
-	middlewares *middlewares.MiddlewareManager
-}
-
-func NewCoreHandler() *coreHandler {
-	return &coreHandler{}
-}
-
-func (c *coreHandler) setMiddlewares(value *middlewares.MiddlewareManager) *coreHandler {
-	c.middlewares = value
-	return c
+	middlewares   *middlewares.MiddlewareManager
+	commonHandler *handlers.CommonHandler
 }
 
 func (c *CoreCommand) handler() {
+	commonRepository := repository.NewCommonRepository(c.psql, c.psqlStatus)
+	commonSvc := service.NewCommonService(commonRepository)
+	commonHandler := handlers.NewCommonHandler(commonSvc)
+
 	c.handlers = NewCoreHandler().
-		setMiddlewares(middlewares.NewMiddlewareManager(syncconf.Conf))
+		setMiddlewares(middlewares.NewMiddlewareManager(syncconf.Conf)).
+		setCommonHandler(commonHandler)
 }
