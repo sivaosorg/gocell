@@ -44,8 +44,8 @@ func (h *CommonHandler) OnMessage(ctx *gin.Context) {
 		ctx.JSON(response.StatusCode, response)
 		return
 	}
-	h.wsSvc.BroadcastMessage(message)
-	response.SetStatusCode(http.StatusOK).SetMessage("Message sent successfully")
+	go h.wsSvc.BroadcastMessage(message)
+	response.SetStatusCode(http.StatusOK).SetMessage("Message sent successfully").SetData(message)
 	ctx.JSON(response.StatusCode, response)
 	return
 }
