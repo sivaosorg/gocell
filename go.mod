@@ -13,6 +13,7 @@ require (
 	github.com/sivaosorg/postgresconn v1.0.5
 	github.com/sivaosorg/rabbitmqconn v1.0.4
 	github.com/sivaosorg/redisconn v1.0.2
+	github.com/sivaosorg/wsconn v1.0.3
 	github.com/swaggo/swag v1.16.2
 )
 
@@ -23,6 +24,7 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/jmoiron/sqlx v1.3.5 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
