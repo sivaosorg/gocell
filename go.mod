@@ -11,6 +11,7 @@ require (
 	github.com/sivaosorg/govm v1.2.7
 	github.com/sivaosorg/mysqlconn v1.0.3
 	github.com/sivaosorg/postgresconn v1.0.5
+	github.com/sivaosorg/rabbitmqconn v1.0.4
 	github.com/sivaosorg/redisconn v1.0.2
 	github.com/swaggo/swag v1.16.2
 )
@@ -28,6 +29,7 @@ require (
 	github.com/lib/pq v1.10.9 // indirect
 	github.com/nxadm/tail v1.4.11 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.8 // indirect
+	github.com/rabbitmq/amqp091-go v1.9.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.11 // indirect
 	golang.org/x/arch v0.3.0 // indirect

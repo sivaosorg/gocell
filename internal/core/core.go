@@ -19,17 +19,20 @@ import (
 	"github.com/sivaosorg/govm/utils"
 	"github.com/sivaosorg/mysqlconn/mysqlconn"
 	"github.com/sivaosorg/postgresconn/postgresconn"
+	"github.com/sivaosorg/rabbitmqconn/rabbitmqconn"
 	"github.com/sivaosorg/redisconn/redisconn"
 )
 
 type CoreCommand struct {
-	psql        *postgresconn.Postgres
-	psqlStatus  dbx.Dbx
-	msql        *mysqlconn.MySql
-	msqlStatus  dbx.Dbx
-	redis       *redis.Client
-	redisStatus dbx.Dbx
-	handlers    *coreHandler
+	psql           *postgresconn.Postgres
+	psqlStatus     dbx.Dbx
+	msql           *mysqlconn.MySql
+	msqlStatus     dbx.Dbx
+	redis          *redis.Client
+	redisStatus    dbx.Dbx
+	handlers       *coreHandler
+	rabbitmq       *rabbitmqconn.RabbitMq
+	rabbitmqStatus dbx.Dbx
 }
 
 func (c *CoreCommand) Name() string {
@@ -62,6 +65,7 @@ func (c *CoreCommand) conn() {
 	syncconf.Conf.Postgres.SetTimeout(10 * time.Second)
 	syncconf.Conf.MySql.SetTimeout(10 * time.Second)
 	syncconf.Conf.Redis.SetTimeout(10 * time.Second)
+	syncconf.Conf.RabbitMq.SetTimeout(10 * time.Second)
 
 	// Instances async
 	var wg sync.WaitGroup
@@ -94,6 +98,16 @@ func (c *CoreCommand) conn() {
 		}
 		c.redis = redis
 		c.redisStatus = s
+	}()
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		rabbitmq, s := rabbitmqconn.NewClient(syncconf.Conf.RabbitMq)
+		if s.IsConnected {
+			defer rabbitmq.Close()
+		}
+		c.rabbitmq = rabbitmq
+		c.rabbitmqStatus = s
 	}()
 	wg.Wait()
 }
@@ -164,6 +178,7 @@ func (c *CoreCommand) notify() {
 	go c.sendNotify("Psql Conn Alert", c.psqlStatus, conf)
 	go c.sendNotify("Mysql Conn Alert", c.msqlStatus, conf)
 	go c.sendNotify("Redis Conn Alert", c.redisStatus, conf)
+	go c.sendNotify("RabbitMQ Conn Alert", c.rabbitmqStatus, conf)
 }
 
 func (c *CoreCommand) sendNotify(topic string, status dbx.Dbx, conf telegram.MultiTenantTelegramConfig) {
