@@ -31,11 +31,11 @@ func (h *CommonHandler) OnPsqlStatus(ctx *gin.Context) {
 	return
 }
 
-func (h *CommonHandler) SubscribeMessage(ctx *gin.Context) {
+func (h *CommonHandler) OnSubscribe(ctx *gin.Context) {
 	h.wsSvc.SubscribeMessage(ctx)
 }
 
-func (h *CommonHandler) OnMessage(ctx *gin.Context) {
+func (h *CommonHandler) OnProduce(ctx *gin.Context) {
 	response := entity.NewResponseEntity()
 	var message wsconnx.WsConnMessagePayload
 	message.SetGenesisTimestamp(time.Now())

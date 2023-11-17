@@ -19,9 +19,9 @@ func (c *CoreCommand) routes(core *gin.Engine) {
 			c.handlers.commonHandler.OnPsqlStatus)
 		v1.GET("/common/consumer", // endpoint websocket: ws://127.0.0.1:8081/api/v1/common/consumer
 			c.handlers.middlewares.RequestMiddleWare(),
-			c.handlers.commonHandler.SubscribeMessage)
+			c.handlers.commonHandler.OnSubscribe)
 		v1.POST("/common/producer", // endpoint produce message to websocket
 			c.handlers.middlewares.RequestMiddleWare(),
-			c.handlers.commonHandler.OnMessage)
+			c.handlers.commonHandler.OnProduce)
 	}
 }
