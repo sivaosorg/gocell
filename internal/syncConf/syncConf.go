@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/sivaosorg/govm/apix"
+	"github.com/sivaosorg/govm/coltx"
 	"github.com/sivaosorg/govm/configx"
 	"github.com/sivaosorg/govm/utils"
 )
@@ -11,10 +12,13 @@ import (
 // Global Configs yaml
 var Conf *configx.KeysConfig
 var Params *keyParams
-var Jobs *interface{}
+var Jobs *jobParams
 
 type keyParams struct {
 	Curl []apix.ApiRequestConfig `json:"curl" yaml:"curl"`
+}
+
+type jobParams struct {
 }
 
 type sync struct {
@@ -46,13 +50,13 @@ func (s *sync) GetParams(args []string) (*keyParams, bool, error) {
 	if utils.IsEmpty(args[index]) {
 		return nil, false, nil
 	}
-	if !(index >= 0 && index < len(args)) {
+	if !coltx.IndexExists(args, index) {
 		return nil, true, fmt.Errorf("Out of range args params: %v", index)
 	}
 	params, err := configx.ReadConfig[keyParams](args[index])
 	return params, true, err
 }
 
-func (s *sync) GetJobs(args []string) (*interface{}, bool, error) {
+func (s *sync) GetJobs(args []string) (*jobParams, bool, error) {
 	return nil, true, nil
 }
