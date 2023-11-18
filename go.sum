@@ -130,8 +130,8 @@ github.com/sivaosorg/mysqlconn v1.0.3 h1:UoxFe0abN6jibkk+bH3rvsIh+vOacujgJDvSSgT
 github.com/sivaosorg/mysqlconn v1.0.3/go.mod h1:NqGtpFwM1E09oTK9G5LOHx0nbtFUjHPTo5V9ob1xCto=
 github.com/sivaosorg/postgresconn v1.0.5 h1:/dWZrGdh09QIj7xjFjxs99SpBHk0RanIincazjdWSnU=
 github.com/sivaosorg/postgresconn v1.0.5/go.mod h1:jJDTBrIkD+w1t5zbQt+dMcYmSVwN/2SsEV05p8iVSdY=
-github.com/sivaosorg/rabbitmqconn v1.0.4 h1:NYgyoIONCXHSYGL1uN1AMq/Qw3IyQFxaJzLEwzVqpHc=
-github.com/sivaosorg/rabbitmqconn v1.0.4/go.mod h1:zDfPfd4aoWPEEN6BgeYWNOAKbDyNicRKEceyBq6kL7c=
+github.com/sivaosorg/rabbitmqconn v1.0.5 h1:7/aCCAvGpeftvktqZjAaO7xQ4DhShTV0rMo4zh5DMAM=
+github.com/sivaosorg/rabbitmqconn v1.0.5/go.mod h1:zDfPfd4aoWPEEN6BgeYWNOAKbDyNicRKEceyBq6kL7c=
 github.com/sivaosorg/redisconn v1.0.2 h1:tIAwbuvxZnOKOMxJJu7BLOXPeqtU6HnInkucGa8xVkw=
 github.com/sivaosorg/redisconn v1.0.2/go.mod h1:1n8OEdm98UXcw9eBFW58aclBssfjd0TZNBTrMiCDShw=
 github.com/sivaosorg/wsconn v1.0.3 h1:if//nrT2FDbjgjSHuOPmYz43n4PAd8T1h4q9+nJsGrY=
