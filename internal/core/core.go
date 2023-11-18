@@ -120,6 +120,7 @@ func (c *CoreCommand) run() {
 	// base middlewares
 	core.Use(gin.Logger())
 	core.Use(c.handlers.middlewares.CorsMiddleware())
+	core.Use(c.handlers.middlewares.ErrorMiddleware)
 	core.Use(c.handlers.middlewares.Recovery())
 
 	// set routes

@@ -11,14 +11,10 @@ import (
 	"os"
 	"runtime"
 	"strings"
-	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sivaosorg/gocell/pkg/constant"
-	"github.com/sivaosorg/govm/bot/telegram"
 	"github.com/sivaosorg/govm/entity"
 	"github.com/sivaosorg/govm/logger"
-	"github.com/sivaosorg/govm/timex"
 )
 
 var (
@@ -79,22 +75,10 @@ func (m *MiddlewareManager) CustomRecoveryWithWriter(out io.Writer, handle Recov
 }
 
 func (m *MiddlewareManager) defaultHandleRecovery(c *gin.Context, err any) {
-	if m.conf.AvailableTelegramSeekers() {
-		var builder strings.Builder
-		builder.WriteString(fmt.Sprintf("Tz: %s\n", time.Now().Format(timex.DateTimeFormYearMonthDayHourMinuteSecond)))
-		builder.WriteString(fmt.Sprintf("URL: `%s`\n", c.Request.RequestURI))
-		builder.WriteString(fmt.Sprintf("Status Code: %d\n", http.StatusInternalServerError))
-		builder.WriteString(fmt.Sprintf("Message: %s\n", http.StatusText(http.StatusInternalServerError)))
-		builder.WriteString(fmt.Sprintf("Error(R): `%s`\n", fmt.Sprint(err)))
-		conf, e := m.conf.FindTelegramSeeker(constant.TelegramKeyTenant2)
-		if e == nil {
-			svc := telegram.NewTelegramService(conf.Config, conf.Option)
-			go svc.SendError("Core Application Recovery", builder.String())
-		}
-	}
 	response := entity.NewResponseEntity().InternalServerError(http.StatusText(http.StatusInternalServerError), nil)
 	response.SetErrors(fmt.Sprint(err))
-	c.JSON(http.StatusInternalServerError, response)
+	m.notification(c, err, response.StatusCode)
+	c.JSON(response.StatusCode, response)
 	return
 }
 
