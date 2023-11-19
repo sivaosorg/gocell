@@ -1,5 +1,14 @@
 # Gocell
 
+![GitHub contributors](https://img.shields.io/github/contributors/sivaosorg/gocell)
+![GitHub followers](https://img.shields.io/github/followers/sivaosorg)
+![GitHub User's stars](https://img.shields.io/github/stars/pnguyen215)
+![GitHub language count](https://img.shields.io/github/languages/count/sivaosorg/gocell)
+![GitHub top language](https://img.shields.io/github/languages/top/sivaosorg/gocell)
+![GitHub issues](https://img.shields.io/github/issues/sivaosorg/gocell)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/sivaosorg/gocell)
+![GitHub repo size](https://img.shields.io/github/repo-size/sivaosorg/gocell)
+
 GoCell is a robust and scalable base platform for building web applications using the Go programming language.
 
 ## Table of Contents
