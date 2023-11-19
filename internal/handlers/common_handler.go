@@ -26,7 +26,13 @@ func NewCommonHandler(commonSvc service.CommonService) *CommonHandler {
 }
 
 func (h *CommonHandler) OnPsqlStatus(ctx *gin.Context) {
-	response := entity.NewResponseEntity().SetStatusCode(http.StatusOK).SetData(h.commonSvc.GetPsqlStatus())
+	data := h.commonSvc.GetPsqlStatus()
+	response := entity.NewResponseEntity().SetData(data)
+	if data.IsConnected {
+		response.SetStatusCode(http.StatusOK)
+	} else {
+		response.SetStatusCode(http.StatusInternalServerError)
+	}
 	ctx.JSON(response.StatusCode, response)
 	return
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/sivaosorg/govm/bot/telegram"
 	"github.com/sivaosorg/govm/builder"
 	"github.com/sivaosorg/govm/charge"
+	"github.com/sivaosorg/govm/entity"
 	"github.com/sivaosorg/govm/logger"
 	"github.com/sivaosorg/govm/timex"
 	commonX "github.com/sivaosorg/govm/utils"
@@ -80,9 +81,14 @@ func (m *MiddlewareManager) notify(c *gin.Context, response *responseWriterWrapp
 		return
 	}
 	var builder strings.Builder
+	var icon string
 	url := c.Request.URL.String()
 	method := c.Request.Method
-	icon, _ := blueprint.TypeIcons[blueprint.TypeNotification]
+	if entity.IsStatusCodeSuccess(c.Writer.Status()) {
+		icon, _ = blueprint.TypeIcons[blueprint.TypeSuccess]
+	} else {
+		icon, _ = blueprint.TypeIcons[blueprint.TypeError]
+	}
 	builder.WriteString(fmt.Sprintf("%v %s\n", icon, "Request Notify"))
 	builder.WriteString(fmt.Sprintf("Tz: `%s`\n\n", timestamp))
 	builder.WriteString(fmt.Sprintf("Method: `%s`\n", method))
