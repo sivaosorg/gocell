@@ -16,6 +16,8 @@ func (c *CoreCommand) routes(core *gin.Engine) {
 		v1.GET("/common/psql-status",
 			c.handlers.middlewares.RequestMiddleWare(),
 			c.handlers.middlewares.NoopMiddleWare(),
+			c.handlers.middlewares.RateLimitMiddleWare("psql_rate"),
+			c.handlers.middlewares.NetMiddleware(),
 			c.handlers.commonHandler.OnPsqlStatus)
 		v1.GET("/common/consumer", // endpoint websocket: ws://127.0.0.1:8081/api/v1/common/consumer
 			c.handlers.middlewares.RequestMiddleWare(),

@@ -6,6 +6,7 @@ import (
 	"github.com/sivaosorg/govm/apix"
 	"github.com/sivaosorg/govm/coltx"
 	"github.com/sivaosorg/govm/configx"
+	"github.com/sivaosorg/govm/ratelimitx"
 	"github.com/sivaosorg/govm/utils"
 )
 
@@ -15,7 +16,8 @@ var Params *keyParams
 var Jobs *jobParams
 
 type keyParams struct {
-	Curl []apix.ApiRequestConfig `json:"curl" yaml:"curl"`
+	Curl       []apix.ApiRequestConfig                 `json:"curl" yaml:"curl"`
+	RateLimits []ratelimitx.MultiTenantRateLimitConfig `json:"rate_limit_seekers" yaml:"rate-limit-seekers"`
 }
 
 type jobParams struct {

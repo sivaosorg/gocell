@@ -15,6 +15,7 @@ require (
 	github.com/sivaosorg/redisconn v1.0.2
 	github.com/sivaosorg/wsconn v1.0.3-beta.1
 	github.com/swaggo/swag v1.16.2
+	golang.org/x/time v0.4.0
 )
 
 require (
