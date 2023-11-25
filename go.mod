@@ -8,12 +8,12 @@ require (
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.14.0
 	github.com/go-redis/redis v6.15.9+incompatible
-	github.com/sivaosorg/govm v1.2.7
+	github.com/sivaosorg/govm v1.2.7-beta.1
 	github.com/sivaosorg/mysqlconn v1.0.3
 	github.com/sivaosorg/postgresconn v1.0.5
-	github.com/sivaosorg/rabbitmqconn v1.0.5
+	github.com/sivaosorg/rabbitmqconn v1.0.5-beta.1
 	github.com/sivaosorg/redisconn v1.0.2
-	github.com/sivaosorg/wsconn v1.0.3
+	github.com/sivaosorg/wsconn v1.0.3-beta.1
 	github.com/swaggo/swag v1.16.2
 )
 
