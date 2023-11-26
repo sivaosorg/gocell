@@ -74,7 +74,7 @@ func (c *CoreCommand) conn() {
 		defer wg.Done()
 		psql, s := postgresconn.NewClient(syncconf.Conf.Postgres)
 		if s.IsConnected {
-			defer psql.Close()
+			// defer psql.Close()
 		}
 		c.psql = psql
 		c.psqlStatus = s
@@ -84,7 +84,7 @@ func (c *CoreCommand) conn() {
 		defer wg.Done()
 		msql, s := mysqlconn.NewClient(syncconf.Conf.MySql)
 		if s.IsConnected {
-			defer msql.Close()
+			// defer msql.Close()
 		}
 		c.msql = msql
 		c.msqlStatus = s
@@ -94,7 +94,7 @@ func (c *CoreCommand) conn() {
 		defer wg.Done()
 		redis, s := redisconn.NewClient(syncconf.Conf.Redis)
 		if s.IsConnected {
-			defer redis.Close()
+			// defer redis.Close()
 		}
 		c.redis = redis
 		c.redisStatus = s
@@ -104,7 +104,7 @@ func (c *CoreCommand) conn() {
 		defer wg.Done()
 		rabbitmq, s := rabbitmqconn.NewClient(syncconf.Conf.RabbitMq)
 		if s.IsConnected {
-			defer rabbitmq.Close()
+			// defer rabbitmq.Close()
 		}
 		c.rabbitmq = rabbitmq
 		c.rabbitmqStatus = s
