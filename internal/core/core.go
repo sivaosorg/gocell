@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-redis/redis"
 	syncconf "github.com/sivaosorg/gocell/internal/syncConf"
 	"github.com/sivaosorg/gocell/pkg/constant"
 	"github.com/sivaosorg/govm/blueprint"
@@ -28,7 +27,7 @@ type CoreCommand struct {
 	psqlStatus     dbx.Dbx
 	msql           *mysqlconn.MySql
 	msqlStatus     dbx.Dbx
-	redis          *redis.Client
+	redis          *redisconn.Redis
 	redisStatus    dbx.Dbx
 	handlers       *coreHandler
 	rabbitmq       *rabbitmqconn.RabbitMq
