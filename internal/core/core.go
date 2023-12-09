@@ -16,10 +16,10 @@ import (
 	"github.com/sivaosorg/govm/server"
 	"github.com/sivaosorg/govm/timex"
 	"github.com/sivaosorg/govm/utils"
-	"github.com/sivaosorg/mysqlconn/mysqlconn"
-	"github.com/sivaosorg/postgresconn/postgresconn"
-	"github.com/sivaosorg/rabbitmqconn/rabbitmqconn"
-	"github.com/sivaosorg/redisconn/redisconn"
+	"github.com/sivaosorg/mysqlconn"
+	"github.com/sivaosorg/postgresconn"
+	"github.com/sivaosorg/rabbitmqconn"
+	"github.com/sivaosorg/redisconn"
 )
 
 type CoreCommand struct {
@@ -72,9 +72,6 @@ func (c *CoreCommand) conn() {
 	go func() {
 		defer wg.Done()
 		psql, s := postgresconn.NewClient(syncconf.Conf.Postgres)
-		if s.IsConnected {
-			// defer psql.Close()
-		}
 		c.psql = psql
 		c.psqlStatus = s
 	}()
@@ -82,9 +79,6 @@ func (c *CoreCommand) conn() {
 	go func() {
 		defer wg.Done()
 		msql, s := mysqlconn.NewClient(syncconf.Conf.MySql)
-		if s.IsConnected {
-			// defer msql.Close()
-		}
 		c.msql = msql
 		c.msqlStatus = s
 	}()
@@ -92,9 +86,6 @@ func (c *CoreCommand) conn() {
 	go func() {
 		defer wg.Done()
 		redis, s := redisconn.NewClient(syncconf.Conf.Redis)
-		if s.IsConnected {
-			// defer redis.Close()
-		}
 		c.redis = redis
 		c.redisStatus = s
 	}()
@@ -102,9 +93,6 @@ func (c *CoreCommand) conn() {
 	go func() {
 		defer wg.Done()
 		rabbitmq, s := rabbitmqconn.NewClient(syncconf.Conf.RabbitMq)
-		if s.IsConnected {
-			// defer rabbitmq.Close()
-		}
 		c.rabbitmq = rabbitmq
 		c.rabbitmqStatus = s
 	}()

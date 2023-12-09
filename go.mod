@@ -8,11 +8,11 @@ require (
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.16.0
 	github.com/sivaosorg/govm v1.2.8
-	github.com/sivaosorg/mysqlconn v1.0.4
-	github.com/sivaosorg/postgresconn v1.0.6
-	github.com/sivaosorg/rabbitmqconn v1.0.6
-	github.com/sivaosorg/redisconn v1.0.3
-	github.com/sivaosorg/wsconn v1.0.4
+	github.com/sivaosorg/mysqlconn v1.0.5
+	github.com/sivaosorg/postgresconn v1.0.7
+	github.com/sivaosorg/rabbitmqconn v1.0.8
+	github.com/sivaosorg/redisconn v1.0.4
+	github.com/sivaosorg/wsconn v1.0.5
 	github.com/swaggo/swag v1.16.2
 	golang.org/x/time v0.5.0
 )
@@ -35,7 +35,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
 	github.com/rabbitmq/amqp091-go v1.9.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
-	github.com/ugorji/go/codec v1.2.11 // indirect
+	github.com/ugorji/go/codec v1.2.12 // indirect
 	golang.org/x/arch v0.6.0 // indirect
 	golang.org/x/crypto v0.16.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
@@ -49,7 +49,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-openapi/jsonpointer v0.20.0 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
-	github.com/go-openapi/spec v0.20.9 // indirect
+	github.com/go-openapi/spec v0.20.11 // indirect
 	github.com/go-openapi/swag v0.22.4 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect

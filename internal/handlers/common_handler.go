@@ -9,7 +9,7 @@ import (
 	"github.com/sivaosorg/govm/entity"
 	"github.com/sivaosorg/govm/wsconnx"
 
-	"github.com/sivaosorg/wsconn/wsconn"
+	"github.com/sivaosorg/wsconn"
 )
 
 type CommonHandler struct {

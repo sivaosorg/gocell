@@ -2,7 +2,7 @@ package repository
 
 import (
 	"github.com/sivaosorg/govm/dbx"
-	"github.com/sivaosorg/postgresconn/postgresconn"
+	"github.com/sivaosorg/postgresconn"
 )
 
 type CommonRepository interface {
