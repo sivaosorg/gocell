@@ -14,7 +14,7 @@ type coreHandler struct {
 }
 
 func (c *CoreCommand) handler() {
-	commonRepository := repository.NewCommonRepository(c.psql, c.psqlStatus)
+	commonRepository := repository.NewCommonRepository(c.resolver)
 	commonSvc := service.NewCommonService(commonRepository)
 	commonHandler := handlers.NewCommonHandler(commonSvc)
 

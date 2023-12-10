@@ -2,7 +2,8 @@ package repository
 
 import (
 	"github.com/sivaosorg/govm/dbx"
-	"github.com/sivaosorg/postgresconn"
+
+	dbresolver "github.com/sivaosorg/db.resolver"
 )
 
 type CommonRepository interface {
@@ -10,17 +11,16 @@ type CommonRepository interface {
 }
 
 type commonRepositoryImpl struct {
-	psql       *postgresconn.Postgres
-	psqlStatus dbx.Dbx
+	resolver *dbresolver.MultiTenantDBResolver
 }
 
-func NewCommonRepository(psql *postgresconn.Postgres, psqlStatus dbx.Dbx) CommonRepository {
+func NewCommonRepository(resolver *dbresolver.MultiTenantDBResolver) CommonRepository {
 	return &commonRepositoryImpl{
-		psql:       psql,
-		psqlStatus: psqlStatus,
+		resolver: resolver,
 	}
 }
 
 func (repo *commonRepositoryImpl) GetPsqlStatus() dbx.Dbx {
-	return repo.psqlStatus
+	_, s := repo.resolver.GetDefaultConnector()
+	return s
 }

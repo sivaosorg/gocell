@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	dbresolver "github.com/sivaosorg/db.resolver"
 	syncconf "github.com/sivaosorg/gocell/internal/syncConf"
 	"github.com/sivaosorg/gocell/pkg/constant"
 	"github.com/sivaosorg/govm/blueprint"
@@ -32,6 +33,7 @@ type CoreCommand struct {
 	handlers       *coreHandler
 	rabbitmq       *rabbitmqconn.RabbitMq
 	rabbitmqStatus dbx.Dbx
+	resolver       *dbresolver.MultiTenantDBResolver
 }
 
 func (c *CoreCommand) Name() string {
@@ -50,6 +52,7 @@ func (c *CoreCommand) Execute(args []string) error {
 	if err != nil {
 		return err
 	}
+	c.seeker()
 	c.conn()
 	c.notify()
 	c.handler()
@@ -61,11 +64,6 @@ func (c *CoreCommand) conn() {
 	if syncconf.Conf == nil {
 		return
 	}
-	syncconf.Conf.Postgres.SetTimeout(10 * time.Second)
-	syncconf.Conf.MySql.SetTimeout(10 * time.Second)
-	syncconf.Conf.Redis.SetTimeout(10 * time.Second)
-	syncconf.Conf.RabbitMq.SetTimeout(10 * time.Second)
-
 	// Instances async
 	var wg sync.WaitGroup
 	wg.Add(1)
@@ -96,7 +94,32 @@ func (c *CoreCommand) conn() {
 		c.rabbitmq = rabbitmq
 		c.rabbitmqStatus = s
 	}()
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		c.resolver.
+			AddPsqlConnectors(syncconf.Conf.PostgresSeekers...).
+			AddMsqlConnectors(syncconf.Conf.MySqlSeekers...).
+			SetDefaultConnector(dbresolver.NewPostgresConnector(syncconf.Conf.Postgres))
+	}()
 	wg.Wait()
+}
+
+func (c *CoreCommand) seeker() {
+	c.resolver = dbresolver.NewMultiTenantDBResolver()
+	timeout := 10 * time.Second
+	syncconf.Conf.Postgres.SetTimeout(timeout)
+	syncconf.Conf.MySql.SetTimeout(timeout)
+	syncconf.Conf.Redis.SetTimeout(timeout)
+	syncconf.Conf.RabbitMq.SetTimeout(timeout)
+
+	// updating timeout for context db ping
+	for idx := range syncconf.Conf.PostgresSeekers {
+		syncconf.Conf.PostgresSeekers[idx].Config.SetTimeout(timeout)
+	}
+	for idx := range syncconf.Conf.MySqlSeekers {
+		syncconf.Conf.MySqlSeekers[idx].Config.SetTimeout(timeout)
+	}
 }
 
 func (c *CoreCommand) run() {

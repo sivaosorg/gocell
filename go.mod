@@ -7,6 +7,7 @@ require (
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.16.0
+	github.com/sivaosorg/db.resolver v0.0.3
 	github.com/sivaosorg/govm v1.2.8
 	github.com/sivaosorg/mysqlconn v1.0.5
 	github.com/sivaosorg/postgresconn v1.0.7
