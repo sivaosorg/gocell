@@ -17,7 +17,7 @@ import (
 	"github.com/sivaosorg/govm/server"
 	"github.com/sivaosorg/govm/timex"
 	"github.com/sivaosorg/govm/utils"
-	"github.com/sivaosorg/mysqlconn"
+	"github.com/sivaosorg/msqlconn"
 	"github.com/sivaosorg/postgresconn"
 	"github.com/sivaosorg/redisconn"
 	"github.com/sivaosorg/rmqconn"
@@ -26,7 +26,7 @@ import (
 type CoreCommand struct {
 	psql           *postgresconn.Postgres
 	psqlStatus     dbx.Dbx
-	msql           *mysqlconn.MySql
+	msql           *msqlconn.MySql
 	msqlStatus     dbx.Dbx
 	redis          *redisconn.Redis
 	redisStatus    dbx.Dbx
@@ -76,7 +76,7 @@ func (c *CoreCommand) conn() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		msql, s := mysqlconn.NewClient(syncconf.Conf.MySql)
+		msql, s := msqlconn.NewClient(syncconf.Conf.MySql)
 		c.msql = msql
 		c.msqlStatus = s
 	}()
