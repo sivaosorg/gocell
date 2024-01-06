@@ -7,10 +7,10 @@ require (
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.16.0
-	github.com/sivaosorg/db.resolver v0.0.3
+	github.com/sivaosorg/db.resolver v0.0.4
 	github.com/sivaosorg/govm v1.2.8
 	github.com/sivaosorg/msqlconn v1.0.7
-	github.com/sivaosorg/postgresconn v1.0.7
+	github.com/sivaosorg/psqlconn v1.0.8
 	github.com/sivaosorg/redisconn v1.0.4
 	github.com/sivaosorg/rmqconn v1.0.9
 	github.com/sivaosorg/wsconn v1.0.5
@@ -35,7 +35,6 @@ require (
 	github.com/nxadm/tail v1.4.11 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
 	github.com/rabbitmq/amqp091-go v1.9.0 // indirect
-	github.com/sivaosorg/mysqlconn v1.0.5 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	golang.org/x/arch v0.6.0 // indirect

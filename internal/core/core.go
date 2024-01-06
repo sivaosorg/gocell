@@ -18,13 +18,13 @@ import (
 	"github.com/sivaosorg/govm/timex"
 	"github.com/sivaosorg/govm/utils"
 	"github.com/sivaosorg/msqlconn"
-	"github.com/sivaosorg/postgresconn"
+	"github.com/sivaosorg/psqlconn"
 	"github.com/sivaosorg/redisconn"
 	"github.com/sivaosorg/rmqconn"
 )
 
 type CoreCommand struct {
-	psql           *postgresconn.Postgres
+	psql           *psqlconn.Postgres
 	psqlStatus     dbx.Dbx
 	msql           *msqlconn.MySql
 	msqlStatus     dbx.Dbx
@@ -69,7 +69,7 @@ func (c *CoreCommand) conn() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		psql, s := postgresconn.NewClient(syncconf.Conf.Postgres)
+		psql, s := psqlconn.NewClient(syncconf.Conf.Postgres)
 		c.psql = psql
 		c.psqlStatus = s
 	}()
