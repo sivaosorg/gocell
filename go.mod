@@ -11,8 +11,8 @@ require (
 	github.com/sivaosorg/govm v1.2.8
 	github.com/sivaosorg/mysqlconn v1.0.5
 	github.com/sivaosorg/postgresconn v1.0.7
-	github.com/sivaosorg/rabbitmqconn v1.0.8
 	github.com/sivaosorg/redisconn v1.0.4
+	github.com/sivaosorg/rmqconn v1.0.9
 	github.com/sivaosorg/wsconn v1.0.5
 	github.com/swaggo/swag v1.16.2
 	golang.org/x/time v0.5.0
@@ -64,7 +64,7 @@ require (
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
 	golang.org/x/net v0.19.0 // indirect
-	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/tools v0.16.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

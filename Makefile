@@ -39,3 +39,5 @@ deps-clean-cache:
 swaggo:
 	echo "Starting swagger generating"
 	swag init -g **/**/*.go
+dev-bak:
+	telegram_select_and_send_attachment "Gocell conf-local.yaml" ./config/conf-local.yaml

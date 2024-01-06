@@ -127,10 +127,10 @@ github.com/sivaosorg/mysqlconn v1.0.5 h1:VHVfk6d6NQaMNsaLhojyzxF3PV+TA0I4wekIF5f
 github.com/sivaosorg/mysqlconn v1.0.5/go.mod h1:oohoHcVTYlLw/ABOYgLRF/f4F2sQjbEOLPooxGyT9O8=
 github.com/sivaosorg/postgresconn v1.0.7 h1:36O2bVZdFzOqFPboyDZSp7BpZODrCRjj88KELG50ehQ=
 github.com/sivaosorg/postgresconn v1.0.7/go.mod h1:FfrmwVY0FjdFzU/fZJn5dvGyNBwa4l5HrIMQxIhDrgE=
-github.com/sivaosorg/rabbitmqconn v1.0.8 h1:hRKcMxTb/R6TFH2rn7C6oqIctpxWug2cgI/P2aTK0Vw=
-github.com/sivaosorg/rabbitmqconn v1.0.8/go.mod h1:75GqfgtKmdjLXmxHN0aCn2rLBOnY7eiKjgX1ncTjMZc=
 github.com/sivaosorg/redisconn v1.0.4 h1:uZnGIJU4K6IuELymABb4BMS6KrS9ldyOLh8jpO5Se98=
 github.com/sivaosorg/redisconn v1.0.4/go.mod h1:RYp4AP3HK8MtjqoF1jZleXqrgkAqJdRsHQsvV/d57NA=
+github.com/sivaosorg/rmqconn v1.0.9 h1:k5vL/tiK2Lvnb4LI05iCXmve0wllym0bzQ+vV0p29ic=
+github.com/sivaosorg/rmqconn v1.0.9/go.mod h1:4ziKKKcQ/VzkWcgtstQ5DKsEKRjvSGVXXFa9tUB3ct4=
 github.com/sivaosorg/wsconn v1.0.5 h1:pVJYhdGfczQV1jrBnonOPVKZUF6QFFjJPB+xELzN/Q4=
 github.com/sivaosorg/wsconn v1.0.5/go.mod h1:qQNaHywcMexY0F2KFIlqGix14E5EloaIN9AJDGi2GRA=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
@@ -185,8 +185,8 @@ golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab/go.mod h1:oPkhp1MJrh7nUepCBc
 golang.org/x/sys v0.0.0-20220908164124-27713097b956/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.5.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.6.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
-golang.org/x/sys v0.15.0 h1:h48lPFYpsTvQJZF4EKyI4aLHaev3CxivZmv7yZig9pc=
-golang.org/x/sys v0.15.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
+golang.org/x/sys v0.16.0 h1:xWw16ngr6ZMtmxDyKyIgsE93KNKz5HKmMa3b8ALHidU=
+golang.org/x/sys v0.16.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=
 golang.org/x/term v0.0.0-20210927222741-03fcf44c2211/go.mod h1:jbD1KX2456YbFQfuXm/mYQcufACuNUgVhRMnK/tPxf8=
 golang.org/x/term v0.5.0/go.mod h1:jMB1sMXY+tzblOD4FWmEbocvup2/aLOaQEp7JmGp78k=

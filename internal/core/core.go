@@ -19,8 +19,8 @@ import (
 	"github.com/sivaosorg/govm/utils"
 	"github.com/sivaosorg/mysqlconn"
 	"github.com/sivaosorg/postgresconn"
-	"github.com/sivaosorg/rabbitmqconn"
 	"github.com/sivaosorg/redisconn"
+	"github.com/sivaosorg/rmqconn"
 )
 
 type CoreCommand struct {
@@ -31,7 +31,7 @@ type CoreCommand struct {
 	redis          *redisconn.Redis
 	redisStatus    dbx.Dbx
 	handlers       *coreHandler
-	rabbitmq       *rabbitmqconn.RabbitMq
+	rabbitmq       *rmqconn.RabbitMq
 	rabbitmqStatus dbx.Dbx
 	resolver       *dbresolver.MultiTenantDBResolver
 }
@@ -90,7 +90,7 @@ func (c *CoreCommand) conn() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		rabbitmq, s := rabbitmqconn.NewClient(syncconf.Conf.RabbitMq)
+		rabbitmq, s := rmqconn.NewClient(syncconf.Conf.RabbitMq)
 		c.rabbitmq = rabbitmq
 		c.rabbitmqStatus = s
 	}()
