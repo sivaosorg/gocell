@@ -127,8 +127,8 @@ github.com/sivaosorg/msqlconn v1.0.7 h1:kVUexnAxDK894eO2GZ3zH1YdkNjJvw1b0i5e9JFR
 github.com/sivaosorg/msqlconn v1.0.7/go.mod h1:94wMI4IhUJTpxUl4CBAF14d1pqoCajccbApxXd3qhQk=
 github.com/sivaosorg/psqlconn v1.0.8 h1:BMj9fqezGhNngbbobKUBjD7pIf6+APqFumdO1a37zPY=
 github.com/sivaosorg/psqlconn v1.0.8/go.mod h1:LQeIL3mYEwNR6XZF1ZEPpBRxsHT3xhEByDBDCBCYE4M=
-github.com/sivaosorg/redisconn v1.0.4 h1:uZnGIJU4K6IuELymABb4BMS6KrS9ldyOLh8jpO5Se98=
-github.com/sivaosorg/redisconn v1.0.4/go.mod h1:RYp4AP3HK8MtjqoF1jZleXqrgkAqJdRsHQsvV/d57NA=
+github.com/sivaosorg/redisconn v1.0.5 h1:bKGsLiiqJFCSa7k1PAkaJppIBtvJsmLgAsn0VJPCSoo=
+github.com/sivaosorg/redisconn v1.0.5/go.mod h1:RYp4AP3HK8MtjqoF1jZleXqrgkAqJdRsHQsvV/d57NA=
 github.com/sivaosorg/rmqconn v1.0.9 h1:k5vL/tiK2Lvnb4LI05iCXmve0wllym0bzQ+vV0p29ic=
 github.com/sivaosorg/rmqconn v1.0.9/go.mod h1:4ziKKKcQ/VzkWcgtstQ5DKsEKRjvSGVXXFa9tUB3ct4=
 github.com/sivaosorg/wsconn v1.0.5 h1:pVJYhdGfczQV1jrBnonOPVKZUF6QFFjJPB+xELzN/Q4=

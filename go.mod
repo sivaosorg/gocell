@@ -11,7 +11,7 @@ require (
 	github.com/sivaosorg/govm v1.2.8
 	github.com/sivaosorg/msqlconn v1.0.7
 	github.com/sivaosorg/psqlconn v1.0.8
-	github.com/sivaosorg/redisconn v1.0.4
+	github.com/sivaosorg/redisconn v1.0.5
 	github.com/sivaosorg/rmqconn v1.0.9
 	github.com/sivaosorg/wsconn v1.0.5
 	github.com/swaggo/swag v1.16.2
