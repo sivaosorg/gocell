@@ -8,7 +8,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.16.0
 	github.com/sivaosorg/db.resolver v0.0.4
-	github.com/sivaosorg/govm v1.2.8
+	github.com/sivaosorg/govm v1.2.9
 	github.com/sivaosorg/msqlconn v1.0.7
 	github.com/sivaosorg/psqlconn v1.0.8
 	github.com/sivaosorg/redisconn v1.0.5
