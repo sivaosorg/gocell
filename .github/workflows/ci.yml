@@ -5,33 +5,37 @@ name: Go
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
     tags:
       - "v*"
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Add Go versions as needed
+        go: ["1.19", "1.20.x", "1.21.x"]
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: 1.19
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go }}
 
-    - name: Build
-      run: go build -v ./...
+      - name: Build
+        run: go build -v ./...
 
-    - name: Test
-      run: go test -v ./...
+      - name: Test
+        run: go test -v ./...
 
   create-release:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v') # Only run this job when a valid tag is pushed
+    # Only run this job when a valid tag is pushed
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: Check if tag exists
         id: check_tag
@@ -46,14 +50,30 @@ jobs:
           fi
         shell: bash
 
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          # Ensure all history is fetched
+          fetch-depth: 0
+
+      - name: Apply changelog
+        run: chmod +x git_changelog.sh
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          CHANGELOG=$(./git_changelog.sh)
+          echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
+
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          # tag_name: ${{ steps.check_tag.outputs.tag }}
           tag_name: ${{ env.TAG }}
           body: |
             :gem: released new version ${{ env.TAG }}
+            Changelog:
+            ${{ env.CHANGELOG }}
           draft: false
           prerelease: false
         env:
