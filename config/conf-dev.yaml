@@ -27,6 +27,7 @@ server:
       idle: 10s
     attr:
       max_header_bytes: 1048576
+  timezone: Asia/Ho_Chi_Minh
 # ################################
 # Mongodb Config
 # 2023-11-05 10:48:54
@@ -130,18 +131,18 @@ redis:
 cors:
   enabled: false
   allowed-origins:
-  - '*'
+    - "*"
   allowed-methods:
-  - GET
-  - POST
-  - PUT
-  - DELETE
-  - OPTIONS
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
   allowed-headers:
-  - Origin
-  - Accept
-  - Content-Type
-  - Authorization
+    - Origin
+    - Accept
+    - Content-Type
+    - Authorization
   exposed-headers: []
   allow-credentials: true
   max-age: 3600
@@ -164,106 +165,106 @@ cookie:
 # 2023-11-05 10:48:54
 # ################################
 telegram-seekers:
-- key: tenant_1
-  usable_default: true
-  config:
-    enabled: false
-    debug_mode: false
-    chat_id:
-    - 123456789
-    token: <token_here>
-  option:
-    type: Markdown
-    max-retries: 2
+  - key: tenant_1
+    usable_default: true
+    config:
+      enabled: false
+      debug_mode: false
+      chat_id:
+        - 123456789
+      token: <token_here>
+    option:
+      type: Markdown
+      max-retries: 2
 # ################################
 # Slack Seekers Config
 # 2023-11-05 10:48:54
 # ################################
 slack-seekers:
-- key: tenant_1
-  usable_default: true
-  config:
-    enabled: false
-    debug_mode: false
-    channel_id:
-    - "123456789"
-    token: <token-here>
-  option:
-    max-retries: 0
+  - key: tenant_1
+    usable_default: true
+    config:
+      enabled: false
+      debug_mode: false
+      channel_id:
+        - "123456789"
+      token: <token-here>
+    option:
+      max-retries: 0
 # ################################
 # Mongodb Seekers Config
 # 2023-11-05 10:48:54
 # ################################
 mongodb-seekers:
-- key: tenant_1
-  usable_default: false
-  config:
-    enabled: false
-    debug_mode: false
-    url_conn: mongodb://127.0.0.1:27017/u_db
-    host: 127.0.0.1
-    port: 27017
-    database: u_db
-    username: u@root
-    password: pwd
-    timeout_second_conn: 30
-    allow_conn_sync: true
-    timeout: 10s
-  option: {}
+  - key: tenant_1
+    usable_default: false
+    config:
+      enabled: false
+      debug_mode: false
+      url_conn: mongodb://127.0.0.1:27017/u_db
+      host: 127.0.0.1
+      port: 27017
+      database: u_db
+      username: u@root
+      password: pwd
+      timeout_second_conn: 30
+      allow_conn_sync: true
+      timeout: 10s
+    option: {}
 # ################################
 # MySQL Seekers Config
 # 2023-11-05 10:48:54
 # ################################
 mysql-seekers:
-- key: tenant_1
-  usable_default: false
-  config:
-    enabled: false
-    debug_mode: false
-    database: u_db
-    host: 127.0.0.1
-    port: 3306
-    username: u@root
-    password: pwd
-    max-open-conn: 10
-    max-idle-conn: 2
-    max-life-time-minutes-conn: 10
-  option: {}
+  - key: tenant_1
+    usable_default: false
+    config:
+      enabled: false
+      debug_mode: false
+      database: u_db
+      host: 127.0.0.1
+      port: 3306
+      username: u@root
+      password: pwd
+      max-open-conn: 10
+      max-idle-conn: 2
+      max-life-time-minutes-conn: 10
+    option: {}
 # ################################
 # Postgres Seekers Config
 # 2023-11-05 10:48:54
 # ################################
 postgres-seekers:
-- key: tenant_1
-  usable_default: false
-  config:
-    enabled: false
-    debug_mode: false
-    database: u_db
-    host: 127.0.0.1
-    port: 5432
-    username: u@root
-    password: pwd
-    ssl-mode: disable
-    max-open-conn: 5
-    max-idle-conn: 3
-  option: {}
+  - key: tenant_1
+    usable_default: false
+    config:
+      enabled: false
+      debug_mode: false
+      database: u_db
+      host: 127.0.0.1
+      port: 5432
+      username: u@root
+      password: pwd
+      ssl-mode: disable
+      max-open-conn: 5
+      max-idle-conn: 3
+    option: {}
 # ################################
 # Cookie Seekers Config
 # 2023-11-05 10:48:54
 # ################################
 cookie-seekers:
-- key: tenant_1
-  usable_default: true
-  config:
-    enabled: false
-    name: user
-    value: ""
-    path: /
-    domain: ""
-    max_age: 86400
-    secure: false
-    http_only: true
-    timeout: 10s
-  option:
-    max_retries: 2
+  - key: tenant_1
+    usable_default: true
+    config:
+      enabled: false
+      name: user
+      value: ""
+      path: /
+      domain: ""
+      max_age: 86400
+      secure: false
+      http_only: true
+      timeout: 10s
+    option:
+      max_retries: 2
