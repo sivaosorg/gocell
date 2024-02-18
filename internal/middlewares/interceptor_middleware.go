@@ -72,9 +72,9 @@ func (m *MiddlewareManager) console(c *gin.Context, response *responseWriterWrap
 }
 
 func (m *MiddlewareManager) notify(c *gin.Context, response *responseWriterWrapper, timestamp string, raw []byte, err error) {
-	conf, err := m.conf.FindTelegramSeeker(constant.TelegramKeyTenant1)
-	if err != nil {
-		logger.Errorf("Telegram Bot Notify", err)
+	conf, _err := m.conf.FindTelegramSeeker(constant.TelegramKeyTenant1)
+	if _err != nil {
+		logger.Errorf("Telegram Bot Notify", _err)
 		return
 	}
 	if !conf.Config.IsEnabled {
@@ -85,9 +85,9 @@ func (m *MiddlewareManager) notify(c *gin.Context, response *responseWriterWrapp
 	url := c.Request.URL.String()
 	method := c.Request.Method
 	if entity.IsStatusCodeSuccess(c.Writer.Status()) {
-		icon, _ = blueprint.TypeIcons[blueprint.TypeSuccess]
+		icon = blueprint.TypeIcons[blueprint.TypeSuccess]
 	} else {
-		icon, _ = blueprint.TypeIcons[blueprint.TypeError]
+		icon = blueprint.TypeIcons[blueprint.TypeError]
 	}
 	builder.WriteString(fmt.Sprintf("%v %s\n", icon, "Request Notify"))
 	builder.WriteString(fmt.Sprintf("Tz: `%s`\n\n", timestamp))

@@ -39,9 +39,9 @@ func (m *MiddlewareManager) notification(c *gin.Context, err any, status int) {
 		return
 	}
 	var builder strings.Builder
-	icon, _ := blueprint.TypeIcons[blueprint.TypeError]
+	icon := blueprint.TypeIcons[blueprint.TypeError]
 	builder.WriteString(fmt.Sprintf("%v %s\n", icon, "Core Application Recovery"))
-	builder.WriteString(fmt.Sprintf("Tz: %s\n", time.Now().Format(timex.DateTimeFormYearMonthDayHourMinuteSecond)))
+	builder.WriteString(fmt.Sprintf("Tz: %s\n", time.Now().Format(timex.TimeFormat20060102150405)))
 	builder.WriteString(fmt.Sprintf("URL: `%s`\n", c.Request.RequestURI))
 	builder.WriteString(fmt.Sprintf("Status Code: %d\n", status))
 	builder.WriteString(fmt.Sprintf("Message: %s\n", http.StatusText(status)))

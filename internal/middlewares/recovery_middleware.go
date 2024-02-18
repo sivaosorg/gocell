@@ -79,7 +79,6 @@ func (m *MiddlewareManager) defaultHandleRecovery(c *gin.Context, err any) {
 	response.SetErrors(fmt.Sprint(err))
 	m.notification(c, err, response.StatusCode)
 	c.JSON(response.StatusCode, response)
-	return
 }
 
 // stack returns a nicely formatted stack frame, skipping skip frames.
