@@ -47,7 +47,7 @@ func (m *MiddlewareManager) RequestMiddleWare() gin.HandlerFunc {
 }
 
 func (m *MiddlewareManager) async(c *gin.Context, response *responseWriterWrapper) {
-	tz := timex.With(time.Now()).Format(timex.DateTimeFormYearMonthDayHourMinuteSecond)
+	tz := timex.With(time.Now()).Format(timex.TimeFormat20060102150405)
 	raw, err := utils.SnapshotRequestBodyWith(c)
 	go m.console(c, response, tz, raw, err)
 	go m.notify(c, response, tz, raw, err)
