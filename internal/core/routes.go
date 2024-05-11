@@ -7,17 +7,23 @@ import (
 )
 
 func (c *CoreCommand) routes(e *gin.Engine) {
+	c.wizard(e)
 	c.shared(e)
 	c.protected(e)
 }
 
-// Collection of authenticated endpoints
-func (c *CoreCommand) protected(e *gin.Engine) {
+// Collection of documented endpoints
+func (c *CoreCommand) wizard(e *gin.Engine) {
 	v1 := e.Group("/api/v1")
 	v1.GET("/swagger/index.html", ginSwagger.WrapHandler(
 		swaggerFiles.Handler,
 		ginSwagger.DefaultModelsExpandDepth(-1),
 	))
+}
+
+// Collection of authenticated endpoints
+func (c *CoreCommand) protected(e *gin.Engine) {
+	v1 := e.Group("/api/v1")
 
 	c.handlers.commonHandler.Router(v1.Group("/common"), c.handlers.middlewares)
 }
