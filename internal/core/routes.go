@@ -6,24 +6,31 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-func (c *CoreCommand) routes(core *gin.Engine) {
-	core.GET("/api/v1/swagger/index.html", ginSwagger.WrapHandler(
+func (c *CoreCommand) routes(e *gin.Engine) {
+	c.shared(e)
+	c.protected(e)
+}
+
+// Collection of authenticated endpoints
+func (c *CoreCommand) protected(e *gin.Engine) {
+	v1 := e.Group("/api/v1")
+	v1.GET("/swagger/index.html", ginSwagger.WrapHandler(
 		swaggerFiles.Handler,
 		ginSwagger.DefaultModelsExpandDepth(-1),
 	))
-	v1 := core.Group("/api/v1")
-	{
-		v1.GET("/common/psql-status",
+
+	c.handlers.commonHandler.Router(v1.Group("/common"), c.handlers.middlewares)
+}
+
+// Collection of shared/public endpoints
+func (c *CoreCommand) shared(e *gin.Engine) {
+	v1 := e.Group("/api/v1/shared")
+
+	c.handlers.commonHandler.Router(
+		v1.Group("/common",
 			c.handlers.middlewares.RequestMiddleWare(),
-			c.handlers.middlewares.NoopMiddleWare(),
-			c.handlers.middlewares.RateLimitMiddleWare("psql_rate"),
 			c.handlers.middlewares.NetMiddleware(),
-			c.handlers.commonHandler.OnPsqlStatus)
-		v1.GET("/common/consumer", // endpoint websocket: ws://127.0.0.1:8081/api/v1/common/consumer
-			c.handlers.middlewares.RequestMiddleWare(),
-			c.handlers.commonHandler.OnSubscribe)
-		v1.POST("/common/producer", // endpoint produce message to websocket
-			c.handlers.middlewares.RequestMiddleWare(),
-			c.handlers.commonHandler.OnProduce)
-	}
+			c.handlers.middlewares.RateLimitMiddleWare("psql_rate"),
+		),
+		c.handlers.middlewares)
 }

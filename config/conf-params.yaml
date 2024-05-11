@@ -36,8 +36,8 @@ curl:
           max_interval: 10s
           backoff_factor: 2
           retry_on_status:
-          - 500
-          - 504
+            - 500
+            - 504
         authentication:
           enabled: false
           type: basic
@@ -48,7 +48,7 @@ curl:
           enabled: false
           debug_mode: true
           chat_id:
-          - 123456789
+            - 123456789
           token: <token_here>
       b_endpoint:
         enabled: true
@@ -72,8 +72,8 @@ curl:
           max_interval: 10s
           backoff_factor: 2
           retry_on_status:
-          - 500
-          - 504
+            - 500
+            - 504
         authentication:
           enabled: false
           type: basic
@@ -84,7 +84,7 @@ curl:
           enabled: false
           debug_mode: true
           chat_id:
-          - 123456789
+            - 123456789
           token: <token_here>
     retry:
       enabled: true
@@ -93,24 +93,24 @@ curl:
       max_interval: 10s
       backoff_factor: 2
       retry_on_status:
-      - 500
-      - 504
+        - 500
+        - 504
     telegram:
       enabled: true
       debug_mode: true
       chat_id:
-      - 123456789
+        - 123456789
       token: <token_here>
 # ################################
 # Rate Limit Seekers Config
 # 2023-11-25 12:02:54
 # ################################
 rate-limit-seekers:
-- key: "psql_rate"
-  usable_default: false 
-  config:
-    enabled: false
-    rate: 2
-    max_burst: 1
-  option:
-    max_retries: 2
+  - key: "psql_rate"
+    usable_default: false
+    config:
+      enabled: false
+      rate: 2
+      max_burst: 1
+    option:
+      max_retries: 2
