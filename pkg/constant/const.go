@@ -1,6 +1,6 @@
 package constant
 
 const (
-	TelegramKeyTenant1 = "core_status"
-	TelegramKeyTenant2 = "core_recovery"
+	TelegramKey001 = "core_status"
+	TelegramKey002 = "core_recovery"
 )

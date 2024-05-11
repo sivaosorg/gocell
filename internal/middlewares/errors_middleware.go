@@ -18,12 +18,12 @@ import (
 func (m *MiddlewareManager) ErrorMiddleware(c *gin.Context) {
 	defer func() {
 		if err := recover(); err != nil {
-			logger.Debugf("Recovered errors from panic:", err)
+			logger.Debugf("Recovered errors from panic: %v", err)
 			m.defaultHandleRecovery(c, err)
 			return
 		}
 		if len(c.Errors) > 0 {
-			logger.Debugf("Business logic errors:", c.Errors)
+			logger.Debugf("Business logic errors: %v", c.Errors)
 			response := entity.NewResponseEntity().BadRequest(http.StatusText(http.StatusBadRequest), nil)
 			response.SetErrors(fmt.Sprint(c.Errors))
 			m.notification(c, c.Errors, response.StatusCode)
@@ -46,7 +46,7 @@ func (m *MiddlewareManager) notification(c *gin.Context, err any, status int) {
 	builder.WriteString(fmt.Sprintf("Status Code: %d\n", status))
 	builder.WriteString(fmt.Sprintf("Message: %s\n", http.StatusText(status)))
 	builder.WriteString(fmt.Sprintf("Error(R): `%s`\n", fmt.Sprint(err)))
-	conf, e := m.conf.FindTelegramSeeker(constant.TelegramKeyTenant2)
+	conf, e := m.conf.FindTelegramSeeker(constant.TelegramKey002)
 	if e != nil {
 		return
 	}

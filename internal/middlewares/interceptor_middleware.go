@@ -72,7 +72,7 @@ func (m *MiddlewareManager) console(c *gin.Context, response *responseWriterWrap
 }
 
 func (m *MiddlewareManager) notify(c *gin.Context, response *responseWriterWrapper, timestamp string, raw []byte, err error) {
-	conf, _err := m.conf.FindTelegramSeeker(constant.TelegramKeyTenant1)
+	conf, _err := m.conf.FindTelegramSeeker(constant.TelegramKey001)
 	if _err != nil {
 		logger.Errorf("Telegram Bot Notify", _err)
 		return

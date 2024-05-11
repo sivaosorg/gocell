@@ -178,7 +178,7 @@ func (c *CoreCommand) snap(args []string) error {
 }
 
 func (c *CoreCommand) notify() {
-	conf, err := syncconf.Conf.FindTelegramSeeker(constant.TelegramKeyTenant1)
+	conf, err := syncconf.Conf.FindTelegramSeeker(constant.TelegramKey001)
 	if err != nil {
 		logger.Errorf("Telegram Bot Notify", err)
 		return
@@ -194,11 +194,11 @@ func (c *CoreCommand) notify() {
 
 func (c *CoreCommand) sendNotify(topic string, status dbx.Dbx, conf telegram.MultiTenantTelegramConfig) {
 	var builder strings.Builder
-	icon, _ := blueprint.TypeIcons[blueprint.TypeSuccess]
+	icon := blueprint.TypeIcons[blueprint.TypeSuccess]
 	if !status.IsConnected {
-		icon, _ = blueprint.TypeIcons[blueprint.TypeError]
+		icon = blueprint.TypeIcons[blueprint.TypeError]
 	}
-	timestamp := timex.With(time.Now()).Format(timex.DateTimeFormYearMonthDayHourMinuteSecond)
+	timestamp := timex.With(time.Now()).Format(timex.TimeFormat20060102150405)
 	builder.WriteString(fmt.Sprintf("%v %s\n", icon, topic))
 	builder.WriteString(fmt.Sprintf("tz: `%s`\n\n", timestamp))
 	builder.WriteString(fmt.Sprintf("connected: `%v`\n", status.IsConnected))
